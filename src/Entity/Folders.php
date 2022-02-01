@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=FoldersRepository::class)
  */
 class Folders
-{
+{ 
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
