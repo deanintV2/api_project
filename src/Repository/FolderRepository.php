@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Folders;
+use App\Entity\Folder;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Folders|null find($id, $lockMode = null, $lockVersion = null)
- * @method Folders|null findOneBy(array $criteria, array $orderBy = null)
- * @method Folders[]    findAll()
- * @method Folders[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Folder|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Folder|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Folder[]    findAll()
+ * @method Folder[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FoldersRepository extends ServiceEntityRepository
+class FolderRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Folders::class);
+        parent::__construct($registry, Folder::class);
     }
 
     // /**
-    //  * @return Folders[] Returns an array of Folders objects
+    //  * @return Folder[] Returns an array of Folder objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class FoldersRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Folders
+    public function findOneBySomeField($value): ?Folder
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.exampleField = :val')

@@ -3,14 +3,16 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\FilesRepository;
+use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
- * @ORM\Entity(repositoryClass=FilesRepository::class)
+ * @ApiResource( *
+ *      normalizationContext={"groups"={"file:read"}},
+ *      denormalizationContext={"groups"={"file:write"}})
+ * @ORM\Entity(repositoryClass=FileRepository::class)
  */
-class Files
+class File
 {
     /**
      * @ORM\Id
@@ -24,9 +26,14 @@ class Files
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $created;
+
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $path;
 
@@ -36,9 +43,9 @@ class Files
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Folders::class, inversedBy="file")
+     * @ORM\ManyToOne(targetEntity=Folder::class, inversedBy="file")
      */
-    private $folders;
+    private $folder;
 
     public function getId(): ?int
     {
@@ -57,12 +64,24 @@ class Files
         return $this;
     }
 
+    public function getCreated(): ?\DateTimeInterface
+    {
+        return $this->created;
+    }
+
+    public function setCreated(\DateTimeInterface $created): self
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
     public function getPath(): ?string
     {
         return $this->path;
     }
 
-    public function setPath(?string $path): self
+    public function setPath(string $path): self
     {
         $this->path = $path;
 
@@ -81,14 +100,14 @@ class Files
         return $this;
     }
 
-    public function getFolders(): ?Folders
+    public function getFolder(): ?Folder
     {
-        return $this->folders;
+        return $this->folder;
     }
 
-    public function setFolders(?Folders $folders): self
+    public function setFolder(?Folder $folder): self
     {
-        $this->folders = $folders;
+        $this->folder = $folder;
 
         return $this;
     }
